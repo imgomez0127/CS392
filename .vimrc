@@ -1,0 +1,20 @@
+set nocompatible
+set number
+filetype off
+set hlsearch
+set smartcase
+set ignorecase
+set incsearch
+set smarttab
+set rtp+=~/.vim/bundle/vundle/
+set ruler
+call vundle#rc()
+set tabstop=4 
+set shiftwidth=4 
+syntax enable
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'	
+Plugin 'itchyny/lightline.vim'
+let g:lightline = {}
+set laststatus=2
+set noshowmode 

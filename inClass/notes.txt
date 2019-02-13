@@ -1,0 +1,69 @@
+int-integer
+float-float
+char- char
+short - short int
+long - long int
+double - double-precision-float
+and can be unsigned (e.g. unsigned int)
+NO BOOL TYPE!
+You can typecast int to char
+float to int
+signed int to unsigned -1 -> 0xfffffff
+explicit 
+float var4 = (float)1;
+implicit
+char var1 = 0x41;
+Constants/Macro
+#define PI 3.14
+every instance of PI will be replaced by the defined constant
+e.g.
+#define PI 3.14
+int main(int argc, char** argv){
+	float pi = PI;
+	return 1;
+}
+Enumerations
+allos to organize multiple constants 
+the first member has val 0 then 1....
+unless explicilty specified
+enum boolean {NO, YES};
+enum months {Jan = 1,FEB,MAR,...};
+enum escapes{BELL='\a',BACKSPACE='\b'};
+when reating a var you have to write 
+enum *insert enum name* *insert var name*;
+unions allow the storing of different data types in the same memory location
+it is large enough to store the largest of its members
+and only holds one value
+
+for writing functions you can write a func without args
+
+int my_func(void) or int my_func()
+
+passing by value and passing by refrence
+
+pass by value doesnt change the value inside the function
+pass by refrence changes the value of the var visible outside the function
+pass by value is the only acceptable way in c
+
+passing a pointer in is still passing by value but your able to update what
+it points to
+
+int caller(int c){
+	int i;
+	
+	callee(&i);
+}
+int calle(int *c){
+	*c = 10;
+}
+
+what is happening is that we are making a copy of the address of i and then we
+set the address 
+then when you do *c=10
+we are saying write 10 at the address in memory which c points to
+
+Format Specifiers these are used in the printf in a fashion like this
+printf("%d",num_1);
+and a list of Format Specifiers can be found online
+
+fflush pushes all things in the buffer into the file
