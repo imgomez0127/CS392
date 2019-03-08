@@ -2,6 +2,11 @@
 * "I pledge my honor that I have abided by the Stevens honor system" - igomez1
 * Author: Ian Gomez
 * Date 02/15/19
+* Description: thi is a Ian Gomez implementation of Linux cat
+* it prints out the file contents
+* ./cat <fileName>
+* Date: 0-22-2019
+* Author: Ian Gomez
 */
 #include<stdio.h>
 #include<errno.h>
@@ -36,7 +41,7 @@ void printFile(char * str, FILE * fp,int sz){
 }
 int main(int argc, char ** argv){
 	if(argc != 2){
-		printf("Usage ./cat <File Name>\n");
+		printf("Usage ./cat <fileName>\n");
 		exit(1);
 	}
 	FILE *fp;
