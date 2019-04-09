@@ -1,0 +1,37 @@
+ls
+vim cs392_shell.log
+clear
+pwd
+ps -h
+exit
+ls
+vim cs392_shell.log
+clear
+pwd 
+pwd
+pwd
+ls -l -a
+ps -h
+man ls
+
+vim cs392_shell.log
+exit
+ls
+cd ..
+ls
+cd ..
+pwd
+cd ..
+cd ../
+ls
+cd ../
+ls
+pwd
+cd ../
+pwd
+cd ../
+ls
+cd ~
+ls
+pwd
+git add .

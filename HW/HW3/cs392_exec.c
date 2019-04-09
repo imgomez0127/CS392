@@ -1,37 +1,57 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<sys/types.h>
 #include<sys/wait.h>
 #include<unistd.h>
 #include<string.h>
 #include"cs392_exec.h"
-void copyRange(char * input, char * dest, int begin, int end){
-    int i;
-    for(i = begin; i < end; ++i){
-        dest[i-begin] = input[i];
+int countCommands(char * str){
+    char str2[strlen(str)];
+    strcpy(str2,str);
+    const char tok[2] =  " ";
+    char * token = strtok(str2,tok);
+    int tokenCount = 0;
+    while(token != NULL){
+        ++tokenCount;
+        token = strtok(NULL,tok);
     }
-    dest[i+1] = '\0';
+    return tokenCount;
 }
-int countSpaces(char * inputString){
-    int amountOfSpaces = 0;
-    for(int i = 0; inputString[i] != '\0'; ++i){
-        if(inputString[i] == ' '){
-            ++amountOfSpaces;
+char ** parseCommand(char * unparsedCommand){
+    int amtOfCommands = countCommands(unparsedCommand);
+    char ** arguments = malloc(amtOfCommands+1);
+    const char tok[2] = " ";
+    char * token = strtok(unparsedCommand,tok);
+    int i = 0;
+    while(token != NULL){
+        arguments[i] = token;
+        token = strtok(NULL,tok);
+        ++i;
+    } 
+    arguments[amtOfCommands] = (char *) NULL;
+    return arguments;
+}
+char * removeNewline(char * str){
+    const char tok[2] = "\n";
+    char * token = strtok(str,tok);
+    return token;
+}
+void executeCommand(char * command){
+    pid_t pid;
+    if((pid = fork()) < 0){
+        perror("fork");
+    }
+    else if(pid == 0){
+        command = removeNewline(command);
+        char ** commandArr = parseCommand(command);
+        execvp(commandArr[0],commandArr);
+        free(commandArr);
+        exit(0);
+    }
+    else{
+        if(waitpid(pid, NULL, 0) < 0){
+            printf("Error in waiting");
+            exit(0);
         }
     }
-    return amountOfSpaces; 
 }
-char ** parseCommand(char * unparsedCommand,int amtOfCommands){
-    char * arguments[amtOfCommands];
-    int argumentLength = 0;
-    int curArgument = 0;
-    char * argument;
-    for(int i = 0; unparsedCommand[i] != '0'; ++i){
-        if(unparsedCommand[i] == ' '){
-            argument = malloc(argumentLength+1);
-            copyRange(unparsedCommand,argument,curArgument,argumentLength+curArgument);
-            argumentLength = 0;
-            curArgument = ++i;
-        }
-    }
-}
-
