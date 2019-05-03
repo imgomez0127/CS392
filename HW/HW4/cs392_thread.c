@@ -1,3 +1,4 @@
+//"I pledge my honor that I have abided by the Stevens honor system" -igomez1 Ian Gomez 
 #include<stdio.h>
 #include<pthread.h>
 #include<errno.h>
@@ -79,7 +80,10 @@ int main(int argc, char ** argv){
             printf("Cannot open file %s due to error %d\n",argv[i+1],errno);
             exit(1);
         }
-        pthread_create(&threads[i],NULL,cs392_thread_run,(void *) fps[i]);
+        if(pthread_create(&threads[i],NULL,cs392_thread_run,(void *) fps[i]) != 0){
+            perror("pthread_create has errord");
+            exit(1);
+        }
     }
     for(int i = 0; i < 3; ++i){
         pthread_join(threads[i],NULL);

@@ -33,9 +33,9 @@ int main(int argc, char ** argv){
     char buff[1024];
     while(1){
         clientFD = accept(socketFD,(struct sockaddr *) &clientAddr,&clientlen);
+        cs392_socket_log(inet_ntoa(clientAddr.sin_addr),argv[1]);
         recv(clientFD,buff,1024,0);
         send(clientFD,buff,1024,0); 
-        cs392_socket_log(inet_ntoa(clientAddr.sin_addr),argv[1]);
         close(clientFD);
     }
     return 0;

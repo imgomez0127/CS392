@@ -5,7 +5,6 @@
 #include<netinet/in.h>
 #include<arpa/inet.h>
 #include<unistd.h>
-#define MAXCONNECTIONS 5 
 int main(int argc, char ** argv){
     if(argc != 3){
         printf("Usage: ./cs392_echoserver <Address> <Port>\n"); 
